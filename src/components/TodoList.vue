@@ -1,13 +1,14 @@
  <template>
- <div id="TodoList">
-     <input type="tex" v-model="newTask" >
-    <button @click="addTask" >Add</button>
-    <todo v-for="(task, index) in tasks" :key="index" :taskData="task" :index="index"
-        @add-Task="addTask" @remove-todo="removeTodo"/>
- </div>
-  
+ <div id="todo-list">
+   <h3 class="text-center"> To do App</h3>
+     <form @submit.prevent>
+        <input type="text"  placeholder="nhập dữ liệu vào đây" v-model="newTask">
+        <button type="submit" @click ="addTask" >Add</button>
+     </form>
+      <todo v-for="(task, index) in tasks" :key="index" :taskData="task" :index="index"
+      @remove-todo="removeTodo"/>
+</div>
 </template>
-
 <script>
 import Todo from './Todo.vue'
 export default {
@@ -23,6 +24,7 @@ export default {
    methods: {
         addTask(){
       this.tasks.push({content: this.newTask, done: false});
+      this.newTask = ""
     },
     removeTodo: function(index) {
       this.tasks.splice(index,1);
@@ -30,10 +32,6 @@ export default {
    },
    components:{
     Todo
-}
+  }
 }
 </script>
-
-<style>
-
-</style>
